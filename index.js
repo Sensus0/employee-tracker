@@ -24,24 +24,25 @@ function menuOptions() {
             type: "list",
             message: "What would you like to do?",
             name: "choice", 
-            choices: ['View all roles', 'View all employees', 'View all Departments', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role', 'Finished']
+            choices: ['View All Roles', 'View All Employees', 'View All Departments', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role', 'Finished']
         })
         .then(answers => {
             console.log(answers)
             if(answers.choice === 'View all roles') {
                 viewRoles();
-            } else if (answers.choice === 'Add a department') {
-                addDepartment();
-            } else if (answers.choice === 'Add a department') {
+            } else if (answers.choice === 'View All Employees') {
                 viewEmployee();
-            } else if (answers.choice === 'View all role') {
-                addRole();
-            } else if (answers.choice === 'Add an employees') {
-                addEmployee();
-            } else if (answers.choice === 'Update an employee role') {
-                updateEmployee();
-            } else if (answers.choice === 'View all Departments') {
+            } else if (answers.choice === 'View All Departments') {
                 viewDepartments();
+            } else if (answers.choice === 'Add A Department') {
+                addDepartment();
+            } else if (answers.choice === 'Add A Role') {
+                addRole();
+            } else if (answers.choice === 'Add An Employees') {
+                addEmployee();
+            } else if (answers.choice === 'Update An Employee Role') {
+                updateEmployee();
+            
             } else {
                 console.log('Finished')
             }
@@ -80,12 +81,6 @@ function addDepartment() {
         message: 'What is the name of the department you want to add?'
     })
     .then(answers => {
-        // connection.query('INSERT INTO department (name) VALUE ("'+answers.addDepartment+'");', (err, results) => {
-        //     if(err) throw err;
-        //     menuOptions();
-        // })
-
-        // prepared statement 
         connection.execute('INSERT INTO department(name) VALUE (?);', answers.addDepartment, (err, results) => {
             if(err) throw err;
             menuOptions();
